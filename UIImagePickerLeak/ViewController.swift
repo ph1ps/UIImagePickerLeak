@@ -10,8 +10,6 @@ import UIKit
 
 class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
-    var picker: UIImagePickerController? = nil
-    
     override func viewDidLoad() {
         super.viewDidLoad()
     }
@@ -21,16 +19,13 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     }
 
     @IBAction func takePhoto(_ sender: Any) {
+ 
+        let picker = UIImagePickerController()
+        picker.delegate = self
+        picker.sourceType = .camera
+        picker.allowsEditing = false
         
-        if picker == nil {
-            picker = UIImagePickerController()
-        }
-        
-        picker?.delegate = self
-        picker?.sourceType = .camera
-        picker?.allowsEditing = false
-        
-        self.present(picker!, animated: true, completion: nil)
+        self.present(picker, animated: true, completion: nil)
     }
     
     @IBAction func recordVideo(_ sender: Any) {
