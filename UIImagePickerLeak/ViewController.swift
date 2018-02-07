@@ -9,9 +9,12 @@
 import UIKit
 
 class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-
+    weak var weakPicker:UIImagePickerController?
     override func viewDidLoad() {
         super.viewDidLoad()
+        Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { (_) in
+            print(self.weakPicker ?? "No picker exists")
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -21,6 +24,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     @IBAction func takePhoto(_ sender: Any) {
  
         let picker = UIImagePickerController()
+        weakPicker = picker;
         picker.delegate = self
         picker.sourceType = .camera
         picker.allowsEditing = false
@@ -31,6 +35,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     @IBAction func recordVideo(_ sender: Any) {
         
         let picker = UIImagePickerController()
+        weakPicker = picker;
         picker.delegate = self
         picker.sourceType = .camera
         picker.allowsEditing = false
